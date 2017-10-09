@@ -1,0 +1,128 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+<Script file="DPEPGPDecay.lua" />
+
+
+<Frame name="DPEPGPDecayFrame" toplevel="false" enableMouse="true" movable="true" parent="UIParent">
+  <Size><AbsDimension x="200" y="250"/></Size><Anchors><Anchor point="TOP"/></Anchors>
+
+  <Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize><AbsValue val="16"/></EdgeSize><TileSize><AbsValue val="32"/></TileSize>
+    <BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
+  </Backdrop>
+
+  <Layers>
+    <Layer level="TITLE">
+      <FontString name="DPEPGP_Decay_TitleText" inherits="GameFontNormal" wraponspaces="true">
+        <Size><AbsDimension x="190" y="25"/></Size>
+        <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-10"/></Offset></Anchor></Anchors>
+      </FontString>
+    </Layer>
+  </Layers>
+
+  <Frames>
+
+    <Button name="$parentClose" inherits="UIPanelCloseButton">
+      <Anchors><Anchor point="TOPRIGHT"><Offset x="-1" y="-1"/></Anchor></Anchors>
+    </Button>
+
+<!-- Box to hold description -->
+    <Frame name="$parentBGFrame1" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="190" y="50"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-45"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="DESC">
+          <FontString name="DPEPGP_Decay_DescText" inherits="DPEPGP_GameFontWhiteL" wraponspaces="true">
+            <Size><AbsDimension x="180" y="50"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="5" y="0"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+<!-- Box to hold Decay options -->
+    <Frame name="$parentBGFrame2" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="190" y="95"/></Size>
+      <Anchors><Anchor point="TOPLEFT" relativeTo="$parentBGFrame1"><Offset><AbsDimension x="0" y="-100"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Decay Options">
+            <Size><AbsDimension x="190" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid1" inherits="DPEPGP_GameFontWhiteL" text="Enter EP decay">
+            <Size><AbsDimension x="100" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-10"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid2" inherits="DPEPGP_GameFontWhiteL" text="Enter GP decay">
+            <Size><AbsDimension x="100" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-39"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Frames>
+	<EditBox name="DPEPGP_Decay_EPValue" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-8"/></Anchor></Anchors>
+        </EditBox>
+	<EditBox name="DPEPGP_Decay_GPValue" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-37"/></Anchor></Anchors>
+        </EditBox>
+	<Button name="DPEPGP_Decay" inherits="GameMenuButtonTemplate" text="Decay">
+	  <size x="175" y="25"/><Anchors><Anchor point="BOTTOM"><Offset x="0" y="10"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_DecayButton_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+      </Frames>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+<!--manually add all Guild Members to the system-->
+    <Button name="$parentAdd" inherits="GameMenuButtonTemplate" text="Add Guild Members">
+      <size x="170" y="25"/><Anchors><Anchor point="BOTTOM"><Offset x="0" y="130"/></Anchor></Anchors>
+      <Scripts>
+        <OnClick>
+          DPEPGP_AddGuild_OnClick();
+        </OnClick>
+      </Scripts>
+    </Button>
+
+  </Frames>
+
+  <Scripts>
+    <OnLoad>
+      DPEPGP_Decay_OnLoad();
+    </OnLoad>
+
+    <OnDragStart>
+      DPEPGPDecayFrame:StartMoving();
+    </OnDragStart>
+
+    <OnDragStop>
+      DPEPGPDecayFrame:StopMovingOrSizing();
+    </OnDragStop>
+
+    <OnMouseUp>
+      DPEPGPDecayFrame:StopMovingOrSizing();
+    </OnMouseUp>
+
+  </Scripts>
+</Frame>
+</Ui>

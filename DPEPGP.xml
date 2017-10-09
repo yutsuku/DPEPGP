@@ -1,0 +1,79 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+<Script file="DPEPGP.lua" />
+
+<Frame name="DPEPGPFrame" toplevel="false" enableMouse="true" movable="true" parent="UIParent">
+  <Size>
+    <AbsDimension x="180" y="30"/>
+  </Size>
+  <Anchors>
+    <Anchor point="TOP"/>
+  </Anchors>
+
+  <Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize>
+      <AbsValue val="16"/>
+    </EdgeSize>
+    <TileSize>
+      <AbsValue val="32"/>
+    </TileSize>
+    <BackgroundInsets>
+      <AbsInset left="5" right="5" top="5" bottom="5"/>
+    </BackgroundInsets>
+  </Backdrop>
+
+  <Frames>
+
+    <Button name="DPEPGP_Raid" inherits="GameMenuButtonTemplate" text="Raid">
+      <size x="50" y="20"/><Anchors><Anchor point="TOPLEFT"><Offset x="10" y="-5"/></Anchor></Anchors>
+      <Scripts>
+        <OnClick>
+          DPEPGP_Raid_OnClick();
+        </OnClick>
+      </Scripts>
+    </Button>
+
+    <Button name="DPEPGP_Loot" inherits="GameMenuButtonTemplate" text="Loot">
+      <size x="50" y="20"/><Anchors><Anchor point="TOPLEFT"><Offset x="65" y="-5"/></Anchor></Anchors>
+      <Scripts>
+        <OnClick>
+          DPEPGP_Loot_OnClick();
+        </OnClick>
+      </Scripts>
+    </Button>
+
+    <Button name="DPEPGP_Decay" inherits="GameMenuButtonTemplate" text="Decay">
+      <size x="50" y="20"/><Anchors><Anchor point="TOPLEFT"><Offset x="120" y="-5"/></Anchor></Anchors>
+      <Scripts>
+        <OnClick>
+          DPEPGP_Decay_OnClick();
+        </OnClick>
+      </Scripts>
+    </Button>
+
+  </Frames>
+
+  <Scripts>
+    <OnLoad>
+      DPEPGP_OnLoad();
+    </OnLoad>
+
+    <OnEvent>
+      DPEPGP_OnEvent(event);
+    </OnEvent>
+
+    <OnDragStart>
+      DPEPGPFrame:StartMoving();
+    </OnDragStart>
+
+    <OnDragStop>
+      DPEPGPFrame:StopMovingOrSizing();
+    </OnDragStop>
+
+    <OnMouseUp>
+      DPEPGPFrame:StopMovingOrSizing();
+    </OnMouseUp>
+
+  </Scripts>
+</Frame>
+</Ui>

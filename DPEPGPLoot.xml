@@ -1,0 +1,216 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+
+  <Script file="DPEPGPLoot.lua" />
+
+
+<!-- Extra Fonts - Gold (Left) - White (Left) - Yellow (Centre) -->
+<Font name="DPEPGP_GameFontNormalL" inherits="GameFontNormal" justifyH="LEFT" virtual="true"></Font>
+<Font name="DPEPGP_GameFontWhiteL" inherits="GameFontNormal" justifyH="LEFT" virtual="true"><Color r="1.0" g="1.0" b="1.0"/></Font>
+<Font name="DPEPGP_GameFontYellow" inherits="GameFontNormal" virtual="true"><Color r="1.0" g="0.9" b="0.8"/></Font>
+
+<Frame name="DPEPGPLootFrame" toplevel="false" enableMouse="true" movable="true" parent="UIParent">
+  <Size><AbsDimension x="600" y="330"/></Size><Anchors><Anchor point="TOP"/></Anchors>
+
+  <Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize><AbsValue val="16"/></EdgeSize><TileSize><AbsValue val="32"/></TileSize>
+    <BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
+  </Backdrop>
+
+  <Layers>
+    <Layer level="TITLE">
+      <FontString name="DPEPGP_Loot_TitleText" inherits="GameFontNormal" wraponspaces="true">
+        <Size><AbsDimension x="550" y="12"/></Size>
+        <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-10"/></Offset></Anchor></Anchors>
+      </FontString>
+    </Layer>
+  </Layers>
+
+  <Frames>
+
+    <Button name="$parentClose" inherits="UIPanelCloseButton">
+      <Anchors>
+        <Anchor point="TOPRIGHT">
+          <Offset x="-1" y="-1"/>
+
+        </Anchor>
+      </Anchors>
+    </Button>
+
+    <Frame name="$parentBGFrame1" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="590" y="60"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-35"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="DPEPGP_Loot_DescText" inherits="DPEPGP_GameFontWhiteL" wraponspaces="true">
+            <Size><AbsDimension x="580" y="60"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+    <Frame name="$parentBGFrame2" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="590" y="100"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-110"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Loot Whores">
+            <Size><AbsDimension x="580" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid1" inherits="DPEPGP_GameFontWhiteL" text="Enter all Players who rolled delimmited by a comma. I.E. Shadarak,Nomagio,Falia">
+            <Size><AbsDimension x="580" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-12"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Frames>
+	<EditBox name="DPEPGP_PlayerLootNames" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="565" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="15" y="-35"/></Anchor></Anchors>
+        </EditBox>
+	<Button name="DPEPGP_AutoRoll" inherits="GameMenuButtonTemplate" text="Auto Roll">
+	  <size x="75" y="25"/><Anchors><Anchor point="BOTTOMLEFT"><Offset x="10" y="10"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_AutoRoll_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+	<Button name="DPEPGP_Validate_Button" inherits="GameMenuButtonTemplate" text="Validate All Names">
+	  <size x="175" y="25"/><Anchors><Anchor point="BOTTOMLEFT"><Offset x="100" y="10"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_Validate_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+	<Button name="DPEPGP_Broadcast_Button" inherits="GameMenuButtonTemplate" text="Broadcast Ratios">
+	  <size x="175" y="25"/><Anchors><Anchor point="BOTTOMRIGHT"><Offset x="-100" y="10"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_Broadcast_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+	<Button name="DPEPGP_ThreeTwoOne" inherits="GameMenuButtonTemplate" text="..3..2..1..">
+	  <size x="75" y="25"/><Anchors><Anchor point="BOTTOMRIGHT"><Offset x="-10" y="10"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_ThreeTwoOne_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+      </Frames>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+    <Frame name="$parentBGFrame3" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="150" y="100"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-225"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="DESC">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Invalid Names">
+            <Size><AbsDimension x="150" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="DPEPGP_BadNames_Text" inherits="DPEPGP_GameFontWhiteL" justifyV="TOP">
+            <Size><AbsDimension x="140" y="90"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-5"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+    <Frame name="$parentBGFrame4" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="430" y="100"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="160" y="-225"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="DESC">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Ratio Preview">
+            <Size><AbsDimension x="430" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="DPEPGP_Preview_Text" inherits="DPEPGP_GameFontWhiteL" justifyV="TOP">
+            <Size><AbsDimension x="420" y="90"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-5"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+    <Frame name="$parentBGFrame5">
+      <Size><AbsDimension x="400" y="30"/></Size>
+      <Anchors><Anchor point="BOTTOM"><Offset><AbsDimension x="5" y="5"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="OVERLAY">
+          <FontString name="DPEPGP_AutoRoll_Warning" font="Fonts\FRIZQT__.TTF" text="WARNING! - Auto Roll is ON!">
+            <Color r="0" g="0.8" b="0" a="1"/>
+            <FontHeight val="24"/>
+            <Size><AbsDimension x="400" y="30"/></Size>
+            <Anchors><Anchor point="CENTER"></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+  </Frames>
+
+  <Scripts>
+    <OnLoad>
+      DPEPGP_Loot_OnLoad();
+    </OnLoad>
+
+    <OnEvent>
+      DPEPGP_Loot_OnEvent(event);
+    </OnEvent>
+
+    <OnDragStart>
+      DPEPGPLootFrame:StartMoving();
+    </OnDragStart>
+
+    <OnDragStop>
+      DPEPGPLootFrame:StopMovingOrSizing();
+    </OnDragStop>
+
+    <OnMouseUp>
+      DPEPGPLootFrame:StopMovingOrSizing();
+    </OnMouseUp>
+
+  </Scripts>
+</Frame>
+</Ui>

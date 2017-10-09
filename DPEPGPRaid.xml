@@ -1,0 +1,235 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
+
+ <Script file="DPEPGPRaid.lua"/>
+
+<!-- Extra Fonts - Gold (Left) - White (Left) - Yellow (Centre) -->
+<Font name="DPEPGP_GameFontNormalL" inherits="GameFontNormal" justifyH="LEFT" virtual="true"></Font>
+<Font name="DPEPGP_GameFontWhiteL" inherits="GameFontNormal" justifyH="LEFT" virtual="true"><Color r="1.0" g="1.0" b="1.0"/></Font>
+<Font name="DPEPGP_GameFontYellow" inherits="GameFontNormal" virtual="true"><Color r="1.0" g="0.9" b="0.8"/></Font>
+
+<!-- Define the Whole Frame -->
+<Frame name="DPEPGPRaidFrame" toplevel="false" enableMouse="true" movable="true" parent="UIParent">
+  <Size><AbsDimension x="360" y="415"/></Size>
+  <Anchors><Anchor point="TOP"/></Anchors>
+<!-- Add the borders -->
+  <Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+    <EdgeSize><AbsValue val="16"/></EdgeSize>
+    <TileSize><AbsValue val="32"/></TileSize>
+    <BackgroundInsets><AbsInset left="5" right="5" top="5" bottom="5"/></BackgroundInsets>
+  </Backdrop>
+<!-- Frame Title -->
+  <Layers>
+    <Layer level="TITLE">
+      <FontString name="DPEPGP_Raid_TitleText" inherits="GameFontNormal" wraponspaces="true">
+        <Size><AbsDimension x="360" y="12"/></Size>
+        <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="-10"/></Offset></Anchor></Anchors>
+      </FontString>
+    </Layer>
+
+  </Layers>
+<!-- Sub Elements -->
+  <Frames>
+<!-- Close Button -->
+    <Button name="$parentClose" inherits="UIPanelCloseButton">
+      <Anchors>
+        <Anchor point="TOPRIGHT">
+          <Offset x="-1" y="-1"/>
+
+        </Anchor>
+      </Anchors>
+    </Button>
+<!-- Box to hold description -->
+    <Frame name="$parentBGFrame1" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="350" y="50"/></Size>
+      <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-35"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="DESC">
+          <FontString name="DPEPGP_Raid_DescText" inherits="DPEPGP_GameFontWhiteL" wraponspaces="true">
+            <Size><AbsDimension x="330" y="50"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="0"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+<!-- Box to hold Full Raid options -->
+    <Frame name="$parentBGFrame2" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="350" y="95"/></Size>
+      <Anchors><Anchor point="TOPLEFT" relativeTo="$parentBGFrame1"><Offset><AbsDimension x="0" y="-70"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Full Raid Options">
+            <Size><AbsDimension x="330" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid1" inherits="DPEPGP_GameFontWhiteL" text="Enter EP value to add to the Raid">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-10"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid2" inherits="DPEPGP_GameFontWhiteL" text="Add EP to everyone in">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-39"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid3" inherits="DPEPGP_GameFontWhiteL" text="Optional message">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-68"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Frames>
+        <EditBox name="DPEPGP_RaidEP" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="285" y="-6"/></Anchor></Anchors>
+        </EditBox>
+
+	<Button name="DPEPGP_AddEPZone" inherits="GameMenuButtonTemplate" text="Zone">
+	  <size x="75" y="25"/><Anchors><Anchor point="TOPLEFT"><Offset x="180" y="-33"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_AddEPZone_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+	<Button name="DPEPGP_AddEPRaid" inherits="GameMenuButtonTemplate" text="Raid">
+	  <size x="75" y="25"/><Anchors><Anchor point="TOPLEFT"><Offset x="260" y="-33"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_AddEPRaid_OnClick();
+            </OnClick>
+          </Scripts>
+        </Button>
+
+        <EditBox name="DPEPGP_RaidOptionalMessage" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="175" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="160" y="-64"/></Anchor></Anchors>
+        </EditBox>
+
+      </Frames>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+<!-- Box to hold Single Player Options -->
+    <Frame name="$parentBGFrame3" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="350" y="155"/></Size>
+      <Anchors><Anchor point="TOPLEFT" relativeTo="$parentBGFrame2"><Offset><AbsDimension x="0" y="-115"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Single Player Options (Raid not required)">
+            <Size><AbsDimension x="330" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentPlayer1" inherits="DPEPGP_GameFontWhiteL" text="Enter the Players name">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-10"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentPlayer2" inherits="DPEPGP_GameFontWhiteL" text="Enter EP value to Add/Set for the Player">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-40"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentPlayer3" inherits="DPEPGP_GameFontWhiteL" text="Enter GP value to Add/Set for the Player">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-70"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentPlayer4" inherits="DPEPGP_GameFontWhiteL" text="Update the Player EP/GP">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-100"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentPlayer5" inherits="DPEPGP_GameFontWhiteL" text="Optional Message">
+            <Size><AbsDimension x="300" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="5" y="-130"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Frames>
+	<EditBox name="DPEPGP_PlayerName" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="160" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="175" y="-8"/></Anchor></Anchors>
+        </EditBox>
+	<EditBox name="DPEPGP_PlayerEP" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="285" y="-38"/></Anchor></Anchors>
+        </EditBox>
+	<EditBox name="DPEPGP_PlayerGP" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="285" y="-68"/></Anchor></Anchors>
+        </EditBox>
+	<EditBox name="DPEPGP_PlayerMessage" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="160" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="175" y="-125"/></Anchor></Anchors>
+        </EditBox>
+
+	<Button name="DPEPGP_PlayerAdd" inherits="GameMenuButtonTemplate" text="Add">
+	  <size x="75" y="25"/><Anchors><Anchor point="TOPLEFT"><Offset x="180" y="-93"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_AddEPSingle_OnClick("Add");
+            </OnClick>
+          </Scripts>
+        </Button>
+	<Button name="DPEPGP_PlayerSet" inherits="GameMenuButtonTemplate" text="Set">
+	  <size x="75" y="25"/><Anchors><Anchor point="TOPLEFT"><Offset x="260" y="-93"/></Anchor></Anchors>
+          <Scripts>
+            <OnClick>
+              DPEPGP_AddEPSingle_OnClick("Set");
+            </OnClick>
+          </Scripts>
+        </Button>
+
+      </Frames>
+
+      <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+      </Scripts>
+    </Frame>
+
+	
+<!--manually add all Guild Members to the system-->
+    <Button name="$parentAdd" inherits="GameMenuButtonTemplate" text="Add Guild Members">
+      <size x="150" y="25"/><Anchors><Anchor point="BOTTOM"><Offset x="0" y="10"/></Anchor></Anchors>
+      <Scripts>
+        <OnClick>
+          DPEPGP_AddGuild_OnClick();
+        </OnClick>
+      </Scripts>
+    </Button>
+
+<!-- end of Sub Elements --> 
+  </Frames>
+
+  <Scripts>
+
+    <OnLoad>
+      DPEPGP_Raid_OnLoad();
+    </OnLoad>
+
+    <OnDragStart>
+      DPEPGPRaidFrame:StartMoving();
+    </OnDragStart>
+
+    <OnDragStop>
+      DPEPGPRaidFrame:StopMovingOrSizing();
+    </OnDragStop>
+
+    <OnMouseUp>
+      DPEPGPRaidFrame:StopMovingOrSizing();
+    </OnMouseUp>
+
+  </Scripts>
+</Frame>
+</Ui>
