@@ -2,7 +2,7 @@
 ## Title: DPEPGP
 ## Author: Falia - De Profundis
 ## Notes: De Profundis EP/GP Loot System alpha v2.0b
-## SavedVariablesPerCharacter: DPEPGP_Saved_Variable, DPEPGP_Saved_IsBroadcasting
+## SavedVariablesPerCharacter: DPEPGP_Saved_Variable, DPEPGP_Saved_IsBroadcasting, DPEPGP_QueryOptions
 DPEPGP.xml
 DPEPGPFunctions.lua
 DPEPGPRaid.xml

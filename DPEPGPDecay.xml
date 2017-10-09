@@ -4,7 +4,7 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 
 
 <Frame name="DPEPGPDecayFrame" toplevel="false" enableMouse="true" movable="true" parent="UIParent">
-  <Size><AbsDimension x="200" y="250"/></Size><Anchors><Anchor point="TOP"/></Anchors>
+  <Size><AbsDimension x="200" y="335"/></Size><Anchors><Anchor point="TOP"/></Anchors>
 
   <Backdrop name="$parentBackdrop" bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
     <EdgeSize><AbsValue val="16"/></EdgeSize><TileSize><AbsValue val="32"/></TileSize>
@@ -71,12 +71,28 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
 	<EditBox name="DPEPGP_Decay_EPValue" inherits="InputBoxTemplate" autoFocus="false">
           <Size><AbsDimension x="50" y="20"/></Size>
           <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-8"/></Anchor></Anchors>
-        </EditBox>
+		  <Scripts>
+            <OnEscapePressed>
+              this:ClearFocus();
+            </OnEscapePressed>
+			<OnEnterPressed>
+              this:ClearFocus();
+            </OnEnterPressed>
+          </Scripts>
+    </EditBox>
 	<EditBox name="DPEPGP_Decay_GPValue" inherits="InputBoxTemplate" autoFocus="false">
           <Size><AbsDimension x="50" y="20"/></Size>
           <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-37"/></Anchor></Anchors>
-        </EditBox>
-	<Button name="DPEPGP_Decay" inherits="GameMenuButtonTemplate" text="Decay">
+		  <Scripts>
+            <OnEscapePressed>
+              this:ClearFocus();
+            </OnEscapePressed>
+			<OnEnterPressed>
+              this:ClearFocus();
+            </OnEnterPressed>
+          </Scripts>
+    </EditBox>
+	<Button name="DPEPGP_DecayButton" inherits="GameMenuButtonTemplate" text="Decay">
 	  <size x="175" y="25"/><Anchors><Anchor point="BOTTOM"><Offset x="0" y="10"/></Anchor></Anchors>
           <Scripts>
             <OnClick>
@@ -94,9 +110,73 @@ C:\Projects\WoW\Bin\Interface\FrameXML\UI.xsd">
       </Scripts>
     </Frame>
 
+<!-- Box to hold Server query options -->
+	<Frame name="$parentBGFrame3" inherits="OptionFrameBoxTemplate">
+      <Size><AbsDimension x="190" y="65"/></Size>
+      <Anchors><Anchor point="TOPLEFT" relativeTo="$parentBGFrame2"><Offset><AbsDimension x="0" y="-120"/></Offset></Anchor></Anchors>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="DPEPGP_GameFontYellow" text="Server query options">
+            <Size><AbsDimension x="190" y="12"/></Size>
+            <Anchors><Anchor point="TOP"><Offset><AbsDimension x="0" y="12"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid1" inherits="DPEPGP_GameFontWhiteL" text="Limit">
+            <Size><AbsDimension x="100" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-10"/></Offset></Anchor></Anchors>
+          </FontString>
+          <FontString name="$parentRaid2" inherits="DPEPGP_GameFontWhiteL" text="Invertal">
+            <Size><AbsDimension x="100" y="12"/></Size>
+            <Anchors><Anchor point="TOPLEFT"><Offset><AbsDimension x="10" y="-39"/></Offset></Anchor></Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+
+      <Frames>
+	<EditBox name="DPEPGP_Decay_QueryLimit" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-8"/></Anchor></Anchors>
+		  <Scripts>
+            <OnEscapePressed>
+              this:ClearFocus();
+            </OnEscapePressed>
+			<OnEnterPressed>
+              this:ClearFocus();
+			  DPEPGP_QueryOptions.limit = tonumber(this:GetText())
+            </OnEnterPressed>
+          </Scripts>
+    </EditBox>
+	<EditBox name="DPEPGP_Decay_QueryInvertal" inherits="InputBoxTemplate" autoFocus="false">
+          <Size><AbsDimension x="50" y="20"/></Size>
+          <Anchors><Anchor point="TOPLEFT"><Offset x="130" y="-37"/></Anchor></Anchors>
+		  <Scripts>
+            <OnEscapePressed>
+              this:ClearFocus();
+            </OnEscapePressed>
+			<OnEnterPressed>
+              this:ClearFocus();
+			  DPEPGP_QueryOptions.invertal = tonumber(this:GetText())
+            </OnEnterPressed>
+          </Scripts>
+    </EditBox>
+      </Frames>
+	   <Scripts>
+        <OnLoad>
+          this:SetBackdropBorderColor(0.4, 0.4, 0.4);
+          this:SetBackdropColor(0.1, 0.1, 0.1);
+        </OnLoad>
+		<OnEnter>
+			GameTooltip:SetOwner(this, "ANCHOR_TOPLEFT");
+			GameTooltip:SetText("Change values if you're getting \ndisconnected or your game crashes.");
+		</OnEnter>
+		<OnLeave>
+			GameTooltip:Hide();
+		</OnLeave>
+      </Scripts>
+    </Frame>
+	
 <!--manually add all Guild Members to the system-->
     <Button name="$parentAdd" inherits="GameMenuButtonTemplate" text="Add Guild Members">
-      <size x="170" y="25"/><Anchors><Anchor point="BOTTOM"><Offset x="0" y="130"/></Anchor></Anchors>
+      <size x="170" y="25"/><Anchors><Anchor point="TOP"><Offset x="0" y="-100"/></Anchor></Anchors>
       <Scripts>
         <OnClick>
           DPEPGP_AddGuild_OnClick();
